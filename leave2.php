@@ -16,7 +16,7 @@ include 'header_data.php';
 									
                                <!-- add employee from -->
 
-									<form action="leave.php" method="post" class="form-horizontal row-fluid" id="form1" enctype="multipart/form-data">
+									<form action="leave2.php" method="post" class="form-horizontal row-fluid" id="form1" enctype="multipart/form-data">
 										
                                  
 
@@ -65,7 +65,7 @@ include 'header_data.php';
 
 
                             <div class="module-option clearfix">
-                                <form action="" method="post" id="form2">
+                                <form action="leave2.php" method="post" id="form2">
                                 <div class="input-append pull-left">
                                     <input type="text" class="span3" placeholder="Filter by id..." name="filter">
                                     <button type="submit" class="btn" name="search">
@@ -106,7 +106,7 @@ include 'header_data.php';
 									<?php
 
 									
-										$sql="SELECT * from leavea order by date desc " ;
+										$sql="SELECT leavea.*,emp.tl from leavea,emp where leavea.emp_id=emp.emp_id and emp.tl='$username' and emp.status=0 order by id DESC " ;
 										$res=mysqli_query($conn,$sql);
    
 									   
@@ -114,7 +114,8 @@ include 'header_data.php';
 										   {
 												   $checkdate = $_POST['startdate'];
 												   $todate  = $_POST['enddate'];
-												   $sql = "SELECT * from leavea where date Between '$checkdate' and '$todate' order by date ";
+												   
+												   $sql = "SELECT leavea.*,emp.tl from leavea,emp where leavea.emp_id=emp.emp_id and emp.tl='$username' and emp.status=0 and leavea.date BETWEEN '$checkdate' and '$todate' order by id DESC";
 												   $res=mysqli_query($conn,$sql);
 											}
 										  else if(isset($_POST['search']))
@@ -123,7 +124,7 @@ include 'header_data.php';
    
 												   if ($filter == '')
 													   {
-													   $sql="SELECT * from leavea order by date desc " ;
+														$sql="SELECT leavea.*,emp.tl from leavea,emp where leavea.emp_id=emp.emp_id and emp.tl='$username' and emp.status=0 order by id DESC " ;
 														   $res=mysqli_query($conn,$sql);
    
 												   }
@@ -133,7 +134,7 @@ include 'header_data.php';
 														   $res=mysqli_query($conn,$sql);
 												   }
 											   }
-									
+					
                                  
 
 

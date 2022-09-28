@@ -17,10 +17,17 @@ if (isset($_POST['submit'])) {
        $result=mysqli_fetch_assoc($query);
        $username=$result['username'];
        $role=$result['role'];
+       
+       if ($role==2) {
+        echo "<script language='javascript' type='text/javascript'> location.href='dashboard2.php' </script>"; 
+        $_SESSION['items']=array($username,$role);
+       
+       }else{
+        echo "<script language='javascript' type='text/javascript'> location.href='dashboard.php' </script>"; 
+        $_SESSION['items']=array($username,$role);
+       }
       
-
-     echo "<script language='javascript' type='text/javascript'> location.href='dashboard.php' </script>"; 
-       $_SESSION['items']=array($username,$role);
+    
       }
       else
       {

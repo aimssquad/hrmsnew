@@ -6,9 +6,14 @@ include 'header_data.php';
 ?>
 
                      	<div class="module">
-							<div class="module-head">
+							<?php 
+                             if ($role!=2) {
+								echo '<div class="module-head">
 								<button type="button" id="formButton" style="display: block; border:none; " class="btn-success">Create Credintials</button>
-							</div>
+							</div>';
+							 }
+							?>
+							
 							<div class="module-body">
 
 									
@@ -204,17 +209,34 @@ include 'header_data.php';
 								  </thead>
 								  <tbody>
 									<?php
-                                     $sql="SELECT * FROM `emp` where status=0 ORDER BY `id` DESC" ;
 
-                                     if (isset($_POST['all'])) {
-                                     	$sql="SELECT * FROM `emp`  ORDER BY `id` DESC" ;
-                                     }
-                                      if (isset($_POST['active'])) {
-                                     	$sql="SELECT * FROM `emp` where status=0 ORDER BY `id` DESC" ;
-                                     }
-                                      if (isset($_POST['deactive'])) {
-                                     	 $sql="SELECT * FROM `emp` where status=1 ORDER BY `id` DESC" ;
-                                     }
+									if($role!=2){
+										$sql="SELECT * FROM `emp` where status=0 ORDER BY `id` DESC" ;
+
+										if (isset($_POST['all'])) {
+											$sql="SELECT * FROM `emp`  ORDER BY `id` DESC" ;
+										}
+										 if (isset($_POST['active'])) {
+											$sql="SELECT * FROM `emp` where status=0 ORDER BY `id` DESC" ;
+										}
+										 if (isset($_POST['deactive'])) {
+											 $sql="SELECT * FROM `emp` where status=1 ORDER BY `id` DESC" ;
+										}
+
+									}else{
+										$sql="SELECT * FROM `emp` where status=0 and emp.tl='$username' ORDER BY `id` DESC" ;
+
+										if (isset($_POST['all'])) {
+											$sql="SELECT * FROM `emp` where emp.tl='$username'  ORDER BY `id` DESC" ;
+										}
+										 if (isset($_POST['active'])) {
+											$sql="SELECT * FROM `emp` where status=0 and emp.tl='$username' ORDER BY `id` DESC" ;
+										}
+										 if (isset($_POST['deactive'])) {
+											 $sql="SELECT * FROM `emp` where status=1 and emp.tl='$username' ORDER BY `id` DESC" ;
+										}
+									}
+                                    
                                     
 
                                    

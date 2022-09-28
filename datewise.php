@@ -98,33 +98,69 @@ include 'header_data.php';
 								  </thead>
 								  <tbody>
 									<?php
-                                     $sql="SELECT * from present order by date desc limit 100" ;
-                                     $res=mysqli_query($conn,$sql);
+                                    if($role!=2){
+										$sql="SELECT * from present order by date desc limit 100" ;
+										$res=mysqli_query($conn,$sql);
+   
+									   
+										 if (isset($_POST['submit']))
+										   {
+												   $checkdate = $_POST['startdate'];
+												   $todate  = $_POST['enddate'];
+												   $sql = "SELECT * from present where date Between '$checkdate' and '$todate' order by date ";
+												   $res=mysqli_query($conn,$sql);
+											}
+										  else if(isset($_POST['search']))
+											   {
+												   $filter=$_POST['filter'];
+   
+												   if ($filter == '')
+													   {
+													   $sql="SELECT * from present order by date asc " ;
+														   $res=mysqli_query($conn,$sql);
+   
+												   }
+												   elseif ($filter != '') 
+												   {
+													   $sql="SELECT * from present where emp_id='$filter' order by date asc" ;
+														   $res=mysqli_query($conn,$sql);
+												   }
+											   }
+   
 
-                                    
-                                      if (isset($_POST['submit']))
-                                        {
-                                            	$checkdate = $_POST['startdate'];
-                                            	$todate  = $_POST['enddate'];
-                                            	$sql = "SELECT * from present where date Between '$checkdate' and '$todate' order by date ";
-                                            	$res=mysqli_query($conn,$sql);
-                                         }
-                                       else if(isset($_POST['search']))
-               							 {
-                   							 $filter=$_POST['filter'];
+									}else{
+										$sql="SELECT present.*,emp.tl from present,emp where present.emp_id=emp.emp_id and emp.tl='$username' order by date desc limit 100" ;
+										$res=mysqli_query($conn,$sql);
+   
+									   
+										 if (isset($_POST['submit']))
+										   {
+												   $checkdate = $_POST['startdate'];
+												   $todate  = $_POST['enddate'];
+												   $sql = "SELECT present.*,emp.tl from present,emp where present.emp_id=emp.emp_id and emp.tl='$username' and present.date BETWEEN '$checkdate' and '$todate' order by date desc limit 100 ";
+												   $res=mysqli_query($conn,$sql);
+											}
+										  else if(isset($_POST['search']))
+											   {
+												   $filter=$_POST['filter'];
+   
+												   if ($filter == '')
+													   {
+														$sql="SELECT present.*,emp.tl from present,emp where present.emp_id=emp.emp_id and emp.tl='$username' order by date desc limit 100" ;
+														   $res=mysqli_query($conn,$sql);
+   
+												   }
+												   elseif ($filter != '') 
+												   {
+													   $sql="SELECT * from present where emp_id='$filter' order by date asc" ;
+														   $res=mysqli_query($conn,$sql);
+												   }
+											   }
+   
+									}
 
-                    							if ($filter == '')
-                   								 {
-                        							$sql="SELECT * from present order by date asc " ;
-                       								 $res=mysqli_query($conn,$sql);
+                                  
 
-                    							}
-                    							elseif ($filter != '') 
-                    							{
-                    								$sql="SELECT * from present where emp_id='$filter' order by date asc" ;
-                       								 $res=mysqli_query($conn,$sql);
-                    							}
-               							 }
                                   	
                                      while($row=mysqli_fetch_assoc($res)) { ?>
                                     <tr>

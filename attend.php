@@ -55,9 +55,14 @@ include 'header_data.php';
 								  <tbody>
 <?php
 
-                                      $date=date('Y-m-d');
-                                     $sql="SELECT * from present where date='$date'" ;
-                                     $res=mysqli_query($conn,$sql);
+                                  $date=date('Y-m-d');
+                                  if ($role==2) {
+                                    $sql="SELECT present.*,emp.tl from `present`,emp WHERE present.emp_id=emp.emp_id and emp.tl='$username' and present.date='$date'" ;
+                                  }else{
+                                    $sql="SELECT * from present where date='$date'" ;
+                                  }
+                                  
+                                  $res=mysqli_query($conn,$sql);
 
                                      
                                   

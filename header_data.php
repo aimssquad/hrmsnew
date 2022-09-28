@@ -90,32 +90,65 @@
       <div class="row">
       <div class="span3">
          <div class="sidebar">
+             <?php if($role==1) {?>
             <ul class="widget widget-menu unstyled">
-			   <?php if ($role==1) {
-				echo '<li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard
-				</a>
-			 </li>';
-			   }else{
-				echo ' <li class="active"><a href="dashboard2.php"><i class="menu-icon icon-dashboard"></i>Dashboard
-				</a>
-			 </li>';
-			   }
-			  
-			   ?>
-              
-               <li><a href="credintial.php"><i class="menu-icon icon-bullhorn"></i>Credentials</a>
+               <li class="active"><a href="dashboard.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>
+               <li>
+                  <a class="collapsed" data-toggle="collapse" href="#Attandance"><i class="menu-icon icon-book">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Attandance</a>
+                  <ul id="Attandance" class="collapse unstyled">
+                     <li><a href="datewise.php"><i class="icon-inbox"></i>Attandance Info</a></li>
+                  </ul>
                </li>
                <li>
-                  <a href="leave.php">
-                  <i class="menu-icon icon-bar-chart"></i>
-                  Leave Requests
-                  </a>
+                  <a class="collapsed" data-toggle="collapse" href="#Employee"><i class="menu-icon icon-paste">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Employee</a>
+                  <ul id="Employee" class="collapse unstyled">
+                     <li><a href="credintial.php"><i class="menu-icon icon-bullhorn"></i>Create Employee</a></li>
+                     <li><a href="employee.php"><i class="icon-inbox"></i>Employee List</a></li> 
+                     <li><a href="#"><i class="icon-inbox"></i>Create HRMS/Access</a></li>    
+                  </ul>
                </li>
-               <li><a href="leave_balnce.php"><i class="menu-icon icon-bullhorn"></i>Leave Balance </a></li>
-               <li><a href="location.php"><i class="menu-icon icon-bullhorn"></i>Location Tracker</a></li>
                <li>
-                  <a href="sep22/sep22.htm"><i class="menu-icon icon-bullhorn"></i>Monthly Roster</a>
+                  <a class="collapsed" data-toggle="collapse" href="#Leave"><i class="menu-icon icon-paste">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Leave</a>
+                  <ul id="Leave" class="collapse unstyled">
+                     <li><a href="leave.php"><i class="menu-icon icon-bar-chart"></i>Leave Requests</a></li>
+                     <li><a href="leave_balnce.php"><i class="menu-icon icon-bullhorn"></i>Leave Balance </a></li>   
+                  </ul>
                </li>
+               <li>
+                  <a class="collapsed" data-toggle="collapse" href="#CMReport"><i class="menu-icon icon-paste">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Call Monitoring</a>
+                  <ul id="CMReport" class="collapse unstyled">
+                     <li><a href="cmreport.php"><i class="menu-icon icon-bullhorn"></i>Call Report</a></li>   
+                  </ul>
+               </li>
+               <li>
+                  <a class="collapsed" data-toggle="collapse" href="#Post"><i class="menu-icon icon-paste">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Enso Post</a>
+                  <ul id="Post" class="collapse unstyled">
+                     <li><a href="#"><i class="menu-icon icon-bullhorn"></i>Create Post</a></li> 
+                     <li><a href="post.php"><i class="menu-icon icon-bar-chart"></i>Show Post</a></li>   
+                  </ul>
+               </li>
+               <li>
+                  <a class="collapsed" data-toggle="collapse" href="#Organization"><i class="menu-icon icon-paste">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Organization</a>
+                  <ul id="Organization" class="collapse unstyled">
+                     <li><a href="#"><i class="menu-icon icon-bar-chart"></i>Create Organization</a></li> 
+                     <li><a href="#"><i class="menu-icon icon-bar-chart"></i>Organization List</a></li>   
+                  </ul>
+               </li>
+            </ul>
+   
+            <ul class="widget widget-menu unstyled">
                <li>
                   <a class="collapsed" data-toggle="collapse" href="#organization"><i class="menu-icon icon-cog">
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
@@ -124,62 +157,86 @@
                      <li><a href="pdf/MobilePhoneRechargereimburceme.pdf" target="_blank"><i class="icon-inbox"></i>Mobile Phone Recharge Bill Reimbursement Policy </a></li>
                   </ul>
                </li>
-               <li><a href="post.php"><i class="menu-icon icon-inbox"></i>Enso Post </a></li>
+               <li><a href="pdf/Holiday_Calendar_for_2022.pdf" target="_blank"><i class="icon-inbox"></i>Holidays </a></li>
+               <li><a href="sep22/sep22.htm" target="_blank"><i class="menu-icon icon-bullhorn"></i>Monthly Roster</a></li>
+               <li><a href="https://wfm.ensomerge.com/recruit/dashboard.php" target="_blank"><i class="icon-inbox"></i>Recruitment Panel</a></li>
+               <li><a href="https://wfm.ensomerge.com/ensotest/adminpanel/admin/home.php" target="_blank"><i class="icon-inbox"></i>Online Test Portal </a></li>
+               <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
             </ul>
-            <!--/.widget-nav-->
-            <ul class="widget widget-menu unstyled">
+             <?php }else{ ?>
+               <ul class="widget widget-menu unstyled">
+               <li class="active"><a href="dashboard2.php"><i class="menu-icon icon-dashboard"></i>Dashboard</a></li>
                <li>
                   <a class="collapsed" data-toggle="collapse" href="#Attandance"><i class="menu-icon icon-book">
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
-                  </i>Time Sheet </a>
+                  </i>Attandance</a>
                   <ul id="Attandance" class="collapse unstyled">
-                     <li><a href="attend.php"><i class="icon-inbox"></i>Attandance </a></li>
-                     <li><a href="datewise.php"><i class="icon-inbox"></i>Date Wise</a></li>
-                     <li><a href="leave_view.php"><i class="icon-inbox"></i>Leave </a></li>
-                     <li><a href="pdf/Holiday_Calendar_for_2022.pdf" target="_blank"><i class="icon-inbox"></i>Holidays </a></li>
+                     <li><a href="datewise.php"><i class="icon-inbox"></i>Attandance Info</a></li>
                   </ul>
                </li>
                <li>
                   <a class="collapsed" data-toggle="collapse" href="#Employee"><i class="menu-icon icon-paste">
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
-                  </i>Employee </a>
+                  </i>Employee</a>
                   <ul id="Employee" class="collapse unstyled">
-                     <li><a href="employee.php"><i class="icon-inbox"></i>Employees </a></li>
-                     <li><a href="#"><i class="icon-inbox"></i>Awards </a></li>
-                     <li><a href="#"><i class="icon-inbox"></i>Resignation </a></li>
+                     <li><a href="credintial.php"><i class="menu-icon icon-bullhorn"></i>Create Employee</a></li>
+                     <li><a href="employee.php"><i class="icon-inbox"></i>Employee List</a></li> 
+                     <li><a href="#"><i class="icon-inbox"></i>Create HRMS/Access</a></li>    
                   </ul>
                </li>
-               <li><a href="https://wfm.ensomerge.com/recruit/dashboard.php"><i class="icon-inbox"></i>Recruitment Panel</a></li>
-               <li><a href="https://wfm.ensomerge.com/ensotest/adminpanel/admin/home.php" target="_blank"><i class="icon-inbox"></i>Online Test Portal </a></li>
-               <li><a href="task.html"><i class="menu-icon icon-tasks"></i>Tasks <b class="label orange pull-right">
-                  19</b> </a>
+               <li>
+                  <a class="collapsed" data-toggle="collapse" href="#Leave"><i class="menu-icon icon-paste">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Leave</a>
+                  <ul id="Leave" class="collapse unstyled">
+                     <li><a href="leave2.php"><i class="menu-icon icon-bar-chart"></i>Leave Requests</a></li>
+                     <li><a href="leave_balnce.php"><i class="menu-icon icon-bullhorn"></i>Leave Balance </a></li>   
+                  </ul>
+               </li>
+               <li>
+                  <a class="collapsed" data-toggle="collapse" href="#CMReport"><i class="menu-icon icon-paste">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Call Monitoring</a>
+                  <ul id="CMReport" class="collapse unstyled">
+                     <li><a href="cmreport.php"><i class="menu-icon icon-bullhorn"></i>Call Report</a></li>   
+                  </ul>
+               </li>
+               <li>
+                  <a class="collapsed" data-toggle="collapse" href="#Post"><i class="menu-icon icon-paste">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Enso Post</a>
+                  <ul id="Post" class="collapse unstyled">
+                     <li><a href="#"><i class="menu-icon icon-bullhorn"></i>Create Post</a></li> 
+                     <li><a href="post.php"><i class="menu-icon icon-bar-chart"></i>Show Post</a></li>   
+                  </ul>
+               </li>
+               <li>
+                  <a class="collapsed" data-toggle="collapse" href="#Organization"><i class="menu-icon icon-paste">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Organization</a>
+                  <ul id="Organization" class="collapse unstyled">
+                     <li><a href="#"><i class="menu-icon icon-bar-chart"></i>Create Organization</a></li> 
+                     <li><a href="#"><i class="menu-icon icon-bar-chart"></i>Organization List</a></li>   
+                  </ul>
                </li>
             </ul>
-            <!--/.widget-nav-->
+   
             <ul class="widget widget-menu unstyled">
                <li>
-                  <a class="collapsed" data-toggle="collapse" href="#Payroll"><i class="menu-icon icon-cog">
+                  <a class="collapsed" data-toggle="collapse" href="#organization"><i class="menu-icon icon-cog">
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
-                  </i>Payroll </a>
-                  <ul id="Payroll" class="collapse unstyled">
-                     <li><a href="#"><i class="icon-inbox"></i>Payroll Templates</a></li>
-                     <li><a href="#"><i class="icon-inbox"></i>Generate Payslips </a></li>
+                  </i>Company Policies </a>
+                  <ul id="organization" class="collapse unstyled">
+                     <li><a href="pdf/MobilePhoneRechargereimburceme.pdf" target="_blank"><i class="icon-inbox"></i>Mobile Phone Recharge Bill Reimbursement Policy </a></li>
                   </ul>
                </li>
-               <li>
-                  <a class="collapsed" data-toggle="collapse" href="#Productivity"><i class="menu-icon icon-cog">
-                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
-                  </i>Productivity </a>
-                  <ul id="Productivity" class="collapse unstyled">
-                     <li><a href="#"><i class="icon-inbox"></i>Dashboard</a></li>
-                     <li><a href="#"><i class="icon-inbox"></i>B2B</a></li>
-                     <li><a href="#"><i class="icon-inbox"></i>B2C</a></li>
-                     <li><a href="#"><i class="icon-inbox"></i></a></li>
-                  </ul>
-               </li>
-               <li><a href="#"><i class="menu-icon icon-tasks"></i>Ticketing </a></li>
+               <li><a href="pdf/Holiday_Calendar_for_2022.pdf" target="_blank"><i class="icon-inbox"></i>Holidays </a></li>
+               <li><a href="sep22/sep22.htm" target="_blank"><i class="menu-icon icon-bullhorn"></i>Monthly Roster</a></li>
+               <li><a href="https://wfm.ensomerge.com/ensotest/adminpanel/admin/home.php" target="_blank"><i class="icon-inbox"></i>Online Test Portal </a></li>
                <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
             </ul>
+
+            <?php } ?>
          </div>
          <!--/.sidebar-->
       </div>

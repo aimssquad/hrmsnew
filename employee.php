@@ -72,43 +72,86 @@ include 'header_data.php';
 								  </thead>
 								  <tbody>
 									<?php
-                                     $sql="SELECT * from employee where status=0  order by id desc" ;
+
+                             if ($role!=2) {
+                              $sql="SELECT * from employee where status=0  order by id desc" ;
                                    
 
-                                     if (isset($_POST['all'])) {
-                                     	   $sql="SELECT * from employee  order by name asc" ;
-                                     }
+                              if (isset($_POST['all'])) {
+                                   $sql="SELECT * from employee  order by name asc" ;
+                              }
 
-                                       if (isset($_POST['male'])) {
-                                     	   $sql="SELECT * from employee where gender='male' and status=0  order by name asc" ;
-                                     }
+                                if (isset($_POST['male'])) {
+                                   $sql="SELECT * from employee where gender='male' and status=0  order by name asc" ;
+                              }
 
-                                       if (isset($_POST['female'])) {
-                                     	   $sql="SELECT * from employee where gender='female'  and status=0 order by name asc" ;
-                                     }
+                                if (isset($_POST['female'])) {
+                                   $sql="SELECT * from employee where gender='female'  and status=0 order by name asc" ;
+                              }
 
-                                      if (isset($_POST['deactive'])) {
-                                     	   $sql="SELECT * from employee where status=1  order by id desc" ;
-                                     }
-                                       if (isset($_POST['active'])) {
-                                     	   $sql="SELECT * from employee where status=0  order by name asc" ;
-                                     }
+                               if (isset($_POST['deactive'])) {
+                                   $sql="SELECT * from employee where status=1  order by id desc" ;
+                              }
+                                if (isset($_POST['active'])) {
+                                   $sql="SELECT * from employee where status=0  order by name asc" ;
+                              }
 
 
 
-                                     if (isset($_POST['search'])) {
-                                     	$filter=$_POST['filter'];
+                              if (isset($_POST['search'])) {
+                                $filter=$_POST['filter'];
 
-                                     	if ($filter == '') {
-                                     		$sql="SELECT * from employee where status=0 order by name asc" ;
-                                           
+                                if ($filter == '') {
+                                  $sql="SELECT * from employee where status=0 order by name asc" ;
+                                    
 
-                                     	}
-                                     	elseif ($filter != '') {
-                                     	 $sql="SELECT * from employee where name='$filter' order by name asc" ;
-                                         
-                                     	}
-                                     }
+                                }
+                                elseif ($filter != '') {
+                                 $sql="SELECT * from employee where name='$filter' order by name asc" ;
+                                  
+                                }
+                              }
+                              
+                             }else{
+                              $sql="SELECT * from employee where status=0 and tl='$username'  order by id desc" ;
+                                   
+
+                              if (isset($_POST['all'])) {
+                                   $sql="SELECT * from employee where  tl='$username'  order by name asc" ;
+                              }
+
+                                if (isset($_POST['male'])) {
+                                   $sql="SELECT * from employee where gender='male' and tl='$username' and status=0  order by name asc" ;
+                              }
+
+                                if (isset($_POST['female'])) {
+                                   $sql="SELECT * from employee where gender='female' and tl='$username'  and status=0 order by name asc" ;
+                              }
+
+                               if (isset($_POST['deactive'])) {
+                                   $sql="SELECT * from employee where status=1 and tl='$username'  order by id desc" ;
+                              }
+                                if (isset($_POST['active'])) {
+                                   $sql="SELECT * from employee where status=0 and tl='$username'  order by name asc" ;
+                              }
+
+
+
+                              if (isset($_POST['search'])) {
+                                $filter=$_POST['filter'];
+
+                                if ($filter == '') {
+                                  $sql="SELECT * from employee where status=0 and tl='$username' order by name asc" ;
+                                    
+
+                                }
+                                elseif ($filter != '') {
+                                 $sql="SELECT * from employee where name='$filter' and tl='$username' order by name asc" ;
+                                  
+                                }
+                              }
+                             }
+                                   
                                   
                                      $res=mysqli_query($conn,$sql);
                                      while($row=mysqli_fetch_assoc($res)) { ?>
@@ -134,8 +177,9 @@ include 'header_data.php';
                                               }
 
                                                echo "<span class='badge badge-edit' ><a href='employee2.php?id=".$row['id']."' class='text-color' class='text-color'>Update</a></span>";
-
+                                              if($role!=2){
                                                echo "&nbsp;<span class='badge badge-delete' > <a href='delete_operation.php?id=".$row['id']."' class='text-color'>Delete</a></span> &nbsp;";
+                                              }
                                                echo "<span class='badge badge-views' >
                                                  <a href='view.php?id=".$row['id']."' class='text-color'>View</a></span>&nbsp;";
 

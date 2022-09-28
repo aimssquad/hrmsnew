@@ -75,18 +75,25 @@ include 'header_data.php';
 									<?php
 
 									$date=date('Y-m-d');
-                                     $sql="SELECT emp.emp_id,emp.emp,emp.roll from emp where status=0 AND emp.emp_id NOT IN (SELECT present.emp_id from present where present.date='$date')" ;
+                     if ($role==2) {
+                      $sql="SELECT emp.emp_id,emp.emp,emp.roll from emp where emp.status=0 and `emp`.tl='$username' AND emp.emp_id NOT IN (SELECT present.emp_id from present where present.date='$date')" ;
+                  
+                     }else{
+                      $sql="SELECT emp.emp_id,emp.emp,emp.roll from emp where emp.status=0 AND emp.emp_id NOT IN (SELECT present.emp_id from present where present.date='$date')" ;
+
+                     }
+                                   
                                      $res=mysqli_query($conn,$sql);
 
                                     
                                       if (isset($_POST['submit']))
                                         {
                                             	$date= $_POST['date'];
-                                            	//$todate  = $_POST['enddate'];
-                                            	$sql = "SELECT emp.emp_id,emp.emp,emp.roll from emp where status=0 AND emp.emp_id NOT IN (SELECT present.emp_id from present where present.date='$date') ";
-                                            	$res=mysqli_query($conn,$sql);
-                                         }else{
-                                            $sql="SELECT emp.emp_id,emp.emp,emp.roll from emp where status=0 AND emp.emp_id NOT IN (SELECT present.emp_id from present where present.date='$date')" ;
+                                        //     	//$todate  = $_POST['enddate'];
+                                        //       $sql="SELECT emp.emp_id,emp.emp,emp.roll from emp where emp.status=0 and `emp`.tl='$username' AND emp.emp_id NOT IN (SELECT present.emp_id from present where present.date='$date')" ;
+                                        //     	$res=mysqli_query($conn,$sql);
+                                        //  }else{
+                                          $sql="SELECT emp.emp_id,emp.emp,emp.roll from emp where emp.status=0 and `emp`.tl='$username' AND emp.emp_id NOT IN (SELECT present.emp_id from present where present.date='$date')" ;
                                      $res=mysqli_query($conn,$sql);
 
                                          }
