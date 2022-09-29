@@ -142,8 +142,8 @@
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
                   </i>Organization</a>
                   <ul id="Organization" class="collapse unstyled">
-                     <li><a href="#"><i class="menu-icon icon-bar-chart"></i>Create Organization</a></li> 
-                     <li><a href="#"><i class="menu-icon icon-bar-chart"></i>Organization List</a></li>   
+                     <li><a href="info_org.php"><i class="menu-icon icon-bar-chart"></i>Organization Info</a></li> 
+           
                   </ul>
                </li>
             </ul>
@@ -215,8 +215,7 @@
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
                   </i>Organization</a>
                   <ul id="Organization" class="collapse unstyled">
-                     <li><a href="#"><i class="menu-icon icon-bar-chart"></i>Create Organization</a></li> 
-                     <li><a href="#"><i class="menu-icon icon-bar-chart"></i>Organization List</a></li>   
+                     <li><a href="info_org.php"><i class="menu-icon icon-bar-chart"></i>Organization Info</a></li>    
                   </ul>
                </li>
             </ul>
