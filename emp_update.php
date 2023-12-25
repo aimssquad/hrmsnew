@@ -7,24 +7,13 @@ $id=$_GET['id'];
 
 
 $sql_query=mysqli_query($conn,"SELECT * FROM `employee` where emp_id=$id");
-
 $row=mysqli_fetch_assoc($sql_query);
-
-
 $sql_query1=mysqli_query($conn,"SELECT * FROM `emp` where emp_id=$id");
-
 $row1=mysqli_fetch_assoc($sql_query1);
-
-
-//job information
-
-
 
 $emp_id=$row1['emp_id'];
 $process=$row1['process'];
 $password=$row1['password'];
-
-
 $role=$row['role'];
 $position=$row['position'];
 $tl=$row['tl'];
@@ -33,32 +22,7 @@ $omail=$row['omail'];
 $salary=$row['salary'];
 $salary_date=$row['salary_date'];
 $name=$row['name'];
-
-
-
-
-
-
-
-
-
-
 ?>
-
-
-
-
-						
-								
-
-
-
-
-
-
-
-									<!-- Start View part -->
-
 									<div class="module-head">
 								
 
@@ -127,9 +91,9 @@ $name=$row['name'];
 											<label class="control-label" for="basicinput">Role</label>
 											<div class="controls">
 												<select tabindex="1" data-placeholder="Select here.." class="span4" name="role" required>
-													<option value="<?php echo $role ?>" ><?php echo $role ?></option>
-													<option >Production</option>
-													<option >Support</option>
+													<option value="<?php echo $role ?>"><?php echo $role ?></option>
+													<option>Production</option>
+													<option>Support</option>
 													
 												</select>
 											</div>

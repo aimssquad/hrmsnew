@@ -6,10 +6,10 @@ include 'include/function.php';
 
 if (isset($_POST['submit'])) {
      $username=get_safe_value($conn,$_POST['name']);
-	 $password=get_safe_value($conn,$_POST['pass']);
+	   $password=get_safe_value($conn,$_POST['pass']);
     
 
-    $query = mysqli_query($conn,"SELECT * FROM  `admin` WHERE `username`='$username' AND `password`='$password'");
+    $query = mysqli_query($conn,"SELECT * FROM  `admin_new` WHERE `username`='$username' AND `password`='$password'");
     
      if (mysqli_num_rows($query) != 0)
     {

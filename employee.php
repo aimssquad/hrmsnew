@@ -12,18 +12,6 @@ include 'header_data.php';
 							
 							<div class="module-body">
 
-									
-
-									
-                           
-
-								
-
-								
-									
-
-
-								
 
                                  <div class="profile-tab-content tab-content">
                                     <div class="tab-pane fade active in" id="activity">

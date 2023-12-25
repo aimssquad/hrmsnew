@@ -99,7 +99,7 @@ include 'header_data.php';
 								  <tbody>
 									<?php
                                     if($role!=2){
-										$sql="SELECT * from present order by date desc limit 100" ;
+										$sql="SELECT * from present order by id desc limit 100" ;
 										$res=mysqli_query($conn,$sql);
    
 									   

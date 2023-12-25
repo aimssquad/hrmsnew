@@ -14,7 +14,7 @@ $server_path="http://wfm.ensomerge.com/hr/post/";
 					<div class="content">
 						<div class="module">
 							<div class="module-head">
-								<h3>News Feed</h3>
+								<h3>Enso Post</h3>
 
 
 							</div>
@@ -54,7 +54,8 @@ $server_path="http://wfm.ensomerge.com/hr/post/";
 												<div class="stream-text">
 													<?php 
 
-                                                        echo $row['post'];
+					  // echo $row['post'];
+					  echo '<p><b>'.$row['subject'].'</b></p>';
 
                                                         $type='submit';
                                                         $id=$row['id'];
@@ -77,8 +78,8 @@ $server_path="http://wfm.ensomerge.com/hr/post/";
                                                 if ($type==1) { ?>
                                                 
                                                  <div class="stream-attachment photo">
-													<div class="responsive-photo">
-														<img src="<?php echo $image; ?>" />
+													<div class="responsive-photo" >
+													<img src="<?php echo $image; ?>" />
 													</div>
 												</div>
                                                 	<?php 
@@ -86,7 +87,7 @@ $server_path="http://wfm.ensomerge.com/hr/post/";
                                                 }elseif($type==2){
                                                	?>
                                                	<div class="stream-attachment photo">
-													<div class="responsive-photo">
+													<div class="responsive-photo" >
 
                                                	<video controls>
                                                	<source src="<?php echo $image; ?>" type="video/mp4">
@@ -101,7 +102,9 @@ $server_path="http://wfm.ensomerge.com/hr/post/";
 
                                                 }
 
+                                            		echo "<br>";
 
+																		echo $row['post'];
                                           ?>
 
 

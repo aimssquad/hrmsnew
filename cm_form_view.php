@@ -89,7 +89,7 @@
                      </td>
                      <td colspan="4"><?php echo $result['q1_score']; ?></td>
                      <td colspan="4"><?php echo $result['q1_point']; ?></td>
-                     <td colspan="20"><textarea rows="2" style="width:95%" name="q1_comment" readonly><?php echo $result['q1_comment']; ?></textarea></td>
+                     <td colspan="20"><textarea rows="2" style="width:95%" name="q1_comment"><?php echo $result['q1_comment']; ?></textarea></td>
                   </tr>
                   <tr>
                      <?php 

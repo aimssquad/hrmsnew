@@ -1,7 +1,7 @@
 <?php
    session_start();
    include 'include/connection.php';
-   
+  include 'conn.php'; 
    if ($_SESSION['items'] == true   ) {
    	echo " ";
      } else {
@@ -13,6 +13,7 @@
      $username = $_SESSION['items'][0];
      
      $role = $_SESSION['items'][1];
+     
    
    
    ?>
@@ -28,6 +29,8 @@
       <link rel="stylesheet" type="text/css" href="style.css">
       <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
       <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
+      <script src="ckeditor/ckeditor.js"></script>
+      <!-- <script src="ckfinder/ckfinder.js"></script> -->
    </head>
    <body>
       <div class="navbar navbar-fixed-top">
@@ -99,6 +102,7 @@
                   </i>Attandance</a>
                   <ul id="Attandance" class="collapse unstyled">
                      <li><a href="datewise.php"><i class="icon-inbox"></i>Attandance Info</a></li>
+                     <li><a href="add_attendance.php"><i class="icon-inbox"></i>Add Attandance</a></li>
                   </ul>
                </li>
                <li>
@@ -133,8 +137,16 @@
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
                   </i>Enso Post</a>
                   <ul id="Post" class="collapse unstyled">
-                     <li><a href="#"><i class="menu-icon icon-bullhorn"></i>Create Post</a></li> 
+                     <li><a href="create_post.php"><i class="menu-icon icon-bullhorn"></i>Create Post</a></li> 
                      <li><a href="post.php"><i class="menu-icon icon-bar-chart"></i>Show Post</a></li>   
+                  </ul>
+               </li>
+               <li>
+                  <a class="collapsed" data-toggle="collapse" href="#Process"><i class="menu-icon icon-paste">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Process</a>
+                  <ul id="Process" class="collapse unstyled">
+                     <li><a href="process.php"><i class="menu-icon icon-bullhorn"></i>Process Update</a></li> 
                   </ul>
                </li>
                <li>
@@ -157,8 +169,8 @@
                      <li><a href="pdf/MobilePhoneRechargereimburceme.pdf" target="_blank"><i class="icon-inbox"></i>Mobile Phone Recharge Bill Reimbursement Policy </a></li>
                   </ul>
                </li>
-               <li><a href="pdf/Holiday_Calendar_for_2022.pdf" target="_blank"><i class="icon-inbox"></i>Holidays </a></li>
-               <li><a href="sep22/sep22.htm" target="_blank"><i class="menu-icon icon-bullhorn"></i>Monthly Roster</a></li>
+	       <li><a href="<?php echo SITE_PATH ?>pdf/Holiday_list.pdf" target="_blank"><i class="icon-inbox"></i>Holidays </a></li>
+	       <li><a href="<?php echo ROASTER_SITE_PATH ?>may23/may23.htm" target="_blank"><i class="menu-icon icon-bullhorn"></i>Monthly Roster</a></li>
                <li><a href="https://wfm.ensomerge.com/recruit/dashboard.php" target="_blank"><i class="icon-inbox"></i>Recruitment Panel</a></li>
                <li><a href="https://wfm.ensomerge.com/ensotest/adminpanel/admin/home.php" target="_blank"><i class="icon-inbox"></i>Online Test Portal </a></li>
                <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
@@ -206,8 +218,16 @@
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
                   </i>Enso Post</a>
                   <ul id="Post" class="collapse unstyled">
-                     <li><a href="#"><i class="menu-icon icon-bullhorn"></i>Create Post</a></li> 
+                     <li><a href=" create_post.php"><i class="menu-icon icon-bullhorn"></i>Create Post</a></li> 
                      <li><a href="post.php"><i class="menu-icon icon-bar-chart"></i>Show Post</a></li>   
+                  </ul>
+               </li>
+               <li>
+                  <a class="collapsed" data-toggle="collapse" href="#Process"><i class="menu-icon icon-paste">
+                  </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
+                  </i>Process</a>
+                  <ul id="Process" class="collapse unstyled">
+                     <li><a href="process.php"><i class="menu-icon icon-bullhorn"></i>Process Update</a></li> 
                   </ul>
                </li>
                <li>
@@ -229,8 +249,8 @@
                      <li><a href="pdf/MobilePhoneRechargereimburceme.pdf" target="_blank"><i class="icon-inbox"></i>Mobile Phone Recharge Bill Reimbursement Policy </a></li>
                   </ul>
                </li>
-               <li><a href="pdf/Holiday_Calendar_for_2022.pdf" target="_blank"><i class="icon-inbox"></i>Holidays </a></li>
-               <li><a href="sep22/sep22.htm" target="_blank"><i class="menu-icon icon-bullhorn"></i>Monthly Roster</a></li>
+	       <li><a href="<?php echo SITE_PATH ?>pdf/Holiday_list.pdf" target="_blank"><i class="icon-inbox"></i>Holidays </a></li>
+	       <li><a href="<?php echo ROASTER_SITE_PATH ?>may23/may23.htm" target="_blank"><i class="menu-icon icon-bullhorn"></i>Monthly Roster</a></li>
                <li><a href="https://wfm.ensomerge.com/ensotest/adminpanel/admin/home.php" target="_blank"><i class="icon-inbox"></i>Online Test Portal </a></li>
                <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
             </ul>
