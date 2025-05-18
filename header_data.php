@@ -30,6 +30,7 @@
       <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
       <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
       <script src="ckeditor/ckeditor.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
       <!-- <script src="ckfinder/ckfinder.js"></script> -->
    </head>
    <body>
@@ -121,14 +122,16 @@
                   </i>Leave</a>
                   <ul id="Leave" class="collapse unstyled">
                      <li><a href="leave.php"><i class="menu-icon icon-bar-chart"></i>Leave Requests</a></li>
+                     <li><a href="leave_balance_type.php"><i class="menu-icon icon-bar-chart"></i>Leave Balance Type</a></li>
                      <li><a href="leave_balnce.php"><i class="menu-icon icon-bullhorn"></i>Leave Balance </a></li>   
                   </ul>
                </li>
                <li>
                   <a class="collapsed" data-toggle="collapse" href="#CMReport"><i class="menu-icon icon-paste">
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
-                  </i>Call Monitoring</a>
+                 </i>Associate Analysis Report</a>
                   <ul id="CMReport" class="collapse unstyled">
+                     <li><a href="view_mm.php"><i class="menu-icon icon-bullhorn"></i>Mirror Monitoring Report</a></li>
                      <li><a href="cmreport.php"><i class="menu-icon icon-bullhorn"></i>Call Report</a></li>   
                   </ul>
                </li>
@@ -166,11 +169,13 @@
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
                   </i>Company Policies </a>
                   <ul id="organization" class="collapse unstyled">
-                     <li><a href="pdf/MobilePhoneRechargereimburceme.pdf" target="_blank"><i class="icon-inbox"></i>Mobile Phone Recharge Bill Reimbursement Policy </a></li>
+                     <li><a href="<?php echo SITE_PATH ?>pdf/ReimbursementPolicy1Nov23V1.pdf" target="_blank"><i class="icon-inbox"></i>Mobile Phone Recharge Bill Reimbursement Policy </a></li>
+                     <li><a href="<?php echo SITE_PATH ?>pdf/LeavePolicy1Nov23V1.pdf" target="_blank"><i class="icon-inbox"></i>Leave Policy </a></li>
+                     <li><a href="<?php echo SITE_PATH ?>pdf/Video-Conference-and-Meeting-Policy-V2.pdf" target="_blank"><i class="icon-inbox"></i>Video-Conference-and-Meeting-Policy-V2 </a></li>
                   </ul>
                </li>
 	       <li><a href="<?php echo SITE_PATH ?>pdf/Holiday_list.pdf" target="_blank"><i class="icon-inbox"></i>Holidays </a></li>
-	       <li><a href="<?php echo ROASTER_SITE_PATH ?>may23/may23.htm" target="_blank"><i class="menu-icon icon-bullhorn"></i>Monthly Roster</a></li>
+	       <li><a href="<?php echo SITE_PATH ?>2024/feb2024/Roster Feb2024.htm" target="_blank"><i class="menu-icon icon-bullhorn"></i>Monthly Roster</a></li>
                <li><a href="https://wfm.ensomerge.com/recruit/dashboard.php" target="_blank"><i class="icon-inbox"></i>Recruitment Panel</a></li>
                <li><a href="https://wfm.ensomerge.com/ensotest/adminpanel/admin/home.php" target="_blank"><i class="icon-inbox"></i>Online Test Portal </a></li>
                <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
@@ -202,14 +207,16 @@
                   </i>Leave</a>
                   <ul id="Leave" class="collapse unstyled">
                      <li><a href="leave2.php"><i class="menu-icon icon-bar-chart"></i>Leave Requests</a></li>
+                     <li><a href="leave_balance_type.php"><i class="menu-icon icon-bar-chart"></i>Leave Balance Type</a></li>
                      <li><a href="leave_balnce.php"><i class="menu-icon icon-bullhorn"></i>Leave Balance </a></li>   
                   </ul>
                </li>
                <li>
                   <a class="collapsed" data-toggle="collapse" href="#CMReport"><i class="menu-icon icon-paste">
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
-                  </i>Call Monitoring</a>
+                      </i>Associate Analysis Report</a>
                   <ul id="CMReport" class="collapse unstyled">
+                     <li><a href="view_mm.php"><i class="menu-icon icon-bullhorn"></i>Mirror Monitoring Report</a></li>
                      <li><a href="cmreport.php"><i class="menu-icon icon-bullhorn"></i>Call Report</a></li>   
                   </ul>
                </li>
@@ -246,7 +253,8 @@
                   </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
                   </i>Company Policies </a>
                   <ul id="organization" class="collapse unstyled">
-                     <li><a href="pdf/MobilePhoneRechargereimburceme.pdf" target="_blank"><i class="icon-inbox"></i>Mobile Phone Recharge Bill Reimbursement Policy </a></li>
+                     <li><a href="<?php echo SITE_PATH ?>pdf/ReimbursementPolicy1Nov23V1.pdf" target="_blank"><i class="icon-inbox"></i>Mobile Phone Recharge Bill Reimbursement Policy </a></li>
+                     <li><a href="<?php echo SITE_PATH ?>pdf/LeavePolicy1Nov23V1.pdf" target="_blank"><i class="icon-inbox"></i>Leave Policy </a></li>
                   </ul>
                </li>
 	       <li><a href="<?php echo SITE_PATH ?>pdf/Holiday_list.pdf" target="_blank"><i class="icon-inbox"></i>Holidays </a></li>

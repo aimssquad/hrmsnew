@@ -16,63 +16,56 @@ include 'header_data.php';
 									
                                <!-- add employee from -->
 
-									<form action="leave.php" method="post" class="form-horizontal row-fluid" id="form1" enctype="multipart/form-data">
-										
-                                 
+								<form action="leave.php" method="post" class="form-horizontal row-fluid" id="form1" enctype="multipart/form-data">
+    <div class="control-group">
+        <label class="control-label" for="basicinput">From Date</label>
+        <div class="controls">
+            <input data-title="A tooltip for the input" type="date" name="startdate" placeholder="" data-original-title="" class="span6" value="<?php echo isset($_POST['startdate']) ? $_POST['startdate'] : ''; ?>">
+        </div>
+    </div>
 
-										 <div class="control-group">
-											<label class="control-label" for="basicinput">From Date</label>
-											<div class="controls">
-												<input data-title="A tooltip for the input"  type="date" name="startdate" placeholder="" data-original-title="" class="span6 ">
-											</div>
-										</div>
+    <div class="control-group">
+        <label class="control-label" for="basicinput">To Date</label>
+        <div class="controls">
+            <input data-title="A tooltip for the input" type="date" name="enddate" placeholder="" data-original-title="" class="span6" value="<?php echo isset($_POST['enddate']) ? $_POST['enddate'] : ''; ?>">
+        </div>
+    </div>
 
-										 <div class="control-group">
-											<label class="control-label" for="basicinput">To Date</label>
-											<div class="controls">
-												<input data-title="A tooltip for the input" type="date" name="enddate" placeholder="" data-original-title="" class="span6 ">
-											</div>
-										</div>
+    <div class="control-group">
+        <label class="control-label" for="basicinput">Status</label>
+        <div class="controls">
+            <select name="status">
+                <option value="">Please select</option>
+                <option value="0" <?php echo isset($_POST['status']) && $_POST['status'] == '0' ? 'selected' : ''; ?>>Pending</option>
+                <option value="1" <?php echo isset($_POST['status']) && $_POST['status'] == '1' ? 'selected' : ''; ?>>Approved</option>
+                <option value="2" <?php echo isset($_POST['status']) && $_POST['status'] == '2' ? 'selected' : ''; ?>>Rejected</option>
+            </select>
+        </div>
+    </div>
 
-										 <div class="control-group">
-											<label class="control-label" for="basicinput">Status</label>
-											<div class="controls">
-												<select name="status" >
-													<option value="">Please select</option>
-													<option value="0">Pending</option>
-													<option value="1">Approved</option>
-													<option value="2">Rejected</option>
-												</select>
-											</div>
-										</div>
+    <div class="control-group">
+        <label class="control-label" for="basicinput">Employee</label>
+        <div class="controls">
+            <select name="emp">
+                <option value="">Please select Employee..</option>
+                <?php 
+                $emp_sql=mysqli_query($conn,"SELECT * FROM `emp` WHERE `status`=0");
+                while ($emp_row=mysqli_fetch_assoc($emp_sql)) { 
+                    $selected = isset($_POST['emp']) && $_POST['emp'] == $emp_row['emp_id'] ? 'selected' : '';
+                ?>
+                    <option value="<?php echo $emp_row['emp_id'] ?>" <?php echo $selected ?>><?php echo $emp_row['emp'] ?></option>
+                <?php } ?>
+            </select>
+        </div>
+    </div>
 
-										<div class="control-group">
-											<label class="control-label" for="basicinput">Employee</label>
-											<div class="controls">
-												<select name="emp" >
-													<option value="">Please select Employee..</option>
-												    <?php 
-													  $emp_sql=mysqli_query($conn,"SELECT * FROM `emp` WHERE `status`=0");
-													  while ($emp_row=mysqli_fetch_assoc($emp_sql)) { ?>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn" name="submit" id="submit">Search</button>
+        </div>
+    </div>
+</form>
 
-													  <option value="<?php echo $emp_row['emp_id'] ?>"><?php echo $emp_row['emp'] ?></option>
-														
-													  <?php }
-
-													?>
-
-
-												</select>
-											</div>
-										</div>
-										
-
-										<div class="control-group">
-											<div class="controls">
-												<button type="submit" class="btn" name="submit" id="submit">Search</button>
-											</div>
-										</div>
-									</form>
 
 									<br>
 
@@ -142,50 +135,48 @@ include 'header_data.php';
 										$res=mysqli_query($conn,$sql);
    
 									   
-										 if (isset($_POST['submit']))
-										   {
-												   $checkdate = $_POST['startdate'];
-												   $todate  = $_POST['enddate'];
-												   $status = $_POST['status'];
-												   $emp_id = $_POST['emp'];
-												   if ($checkdate != '' && $todate != '' && $status == '' && $emp_id == '') {
-												   	 $sql = "SELECT * from leavea where date Between '$checkdate' and '$todate' order by date Desc";
-												   }
-												   elseif ($checkdate == '' && $todate == '' && $status != '' && $emp_id == '') {
-												     $sql = "SELECT * from leavea where status=$status order by date Desc";
-												   }elseif ($checkdate != '' && $todate != '' && $status != '' && $emp_id == '') {
-												   	 $sql = "SELECT * from leavea where date Between '$checkdate' and '$todate' and status=$status order by date Desc";
-												   }
-												   elseif ($checkdate == '' && $todate == '' && $status == '' && $emp_id != '') {
-													$sql = "SELECT * FROM `leavea` WHERE `emp_id`='$emp_id' order by date Desc";
-											   	   }
-													elseif ($checkdate == '' && $todate == '' && $status != '' && $emp_id != '') {
-														$sql = "SELECT * FROM `leavea` WHERE `emp_id`='$emp_id' and status=$status order by date Desc";
-													}
-												  
-												   $res=mysqli_query($conn,$sql);
+										if (isset($_POST['submit'])) {
+											// Process form data
+											$checkdate = $_POST['startdate'];
+											$todate = $_POST['enddate'];
+											$status = $_POST['status'];
+											$emp_id = $_POST['emp'];
+										
+											// Store filter criteria in session
+											$_SESSION['filter_criteria'] = compact('checkdate', 'todate', 'status', 'emp_id');
+										}
+										
+										// Check if filter criteria is set in session
+										if (isset($_SESSION['filter_criteria'])) {
+											$filter_criteria = $_SESSION['filter_criteria'];
+										
+											// Construct SQL query based on filter criteria
+											$sql = "SELECT * FROM leavea WHERE 1=1";
+										
+											// Add conditions based on filter criteria
+											if (!empty($filter_criteria['checkdate']) && !empty($filter_criteria['todate'])) {
+												$sql .= " AND date BETWEEN '{$filter_criteria['checkdate']}' AND '{$filter_criteria['todate']}'";
 											}
-										  else if(isset($_POST['search']))
-											   {
-												   $filter=$_POST['filter'];
-   
-												   if ($filter == '')
-													   {
-													   $sql="SELECT * from leavea order by date desc" ;
-														   $res=mysqli_query($conn,$sql);
-   
-												   }
-												   elseif ($filter != '') 
-												   {
-													   $sql="SELECT * from leavea where emp_id='$filter' order by date Desc" ;
-														   $res=mysqli_query($conn,$sql);
-												   }
-											   }
+										
+											if (!empty($filter_criteria['status'])) {
+												$sql .= " AND status='{$filter_criteria['status']}'";
+											}
+										
+											if (!empty($filter_criteria['emp_id'])) {
+												$sql .= " AND emp_id='{$filter_criteria['emp_id']}'";
+											}
+										
+											// Add ORDER BY clause
+											$sql .= " ORDER BY date DESC";
+										
+											// Execute the SQL query
+											$res = mysqli_query($conn, $sql);
+										}
 									
                                  
 
 
-                                  	
+									if (isset($res) && mysqli_num_rows($res) > 0) {
                                      while($row=mysqli_fetch_assoc($res)) { ?>
                                     <tr>
                                        
@@ -234,7 +225,12 @@ include 'header_data.php';
                                     </tr>
 
 
-                                 <?php  }  ?>
+                                 <?php  } 
+									}else {
+										// Handle case where no data is found
+										echo "<tr><td colspan='11' style='color:red;'>No data found</td></tr>";
+									}
+								 ?>
 								  </tbody>
 								</table>
 

@@ -106,34 +106,45 @@ include 'header_data.php';
 									<?php
 
 									
-										$sql="SELECT leavea.*,emp.tl from leavea,emp where leavea.emp_id=emp.emp_id and emp.tl='$username' and emp.status=0 order by id DESC " ;
-										$res=mysqli_query($conn,$sql);
-   
-									   
-										 if (isset($_POST['submit']))
-										   {
-												   $checkdate = $_POST['startdate'];
-												   $todate  = $_POST['enddate'];
-												   
-												   $sql = "SELECT leavea.*,emp.tl from leavea,emp where leavea.emp_id=emp.emp_id and emp.tl='$username' and emp.status=0 and leavea.date BETWEEN '$checkdate' and '$todate' order by id DESC";
-												   $res=mysqli_query($conn,$sql);
-											}
-										  else if(isset($_POST['search']))
-											   {
-												   $filter=$_POST['filter'];
-   
-												   if ($filter == '')
-													   {
-														$sql="SELECT leavea.*,emp.tl from leavea,emp where leavea.emp_id=emp.emp_id and emp.tl='$username' and emp.status=0 order by id DESC " ;
-														   $res=mysqli_query($conn,$sql);
-   
-												   }
-												   elseif ($filter != '') 
-												   {
-													   $sql="SELECT * from leavea where emp_id='$filter' order by date asc" ;
-														   $res=mysqli_query($conn,$sql);
-												   }
-											   }
+								$sql = "SELECT leavea.*, emp.tl FROM leavea INNER JOIN emp ON leavea.emp_id = emp.emp_id WHERE emp.tl='$username' AND emp.status=0 ";
+
+								// Check if form submitted
+								if (isset($_POST['submit'])) {
+									// Process form data
+									$checkdate = $_POST['startdate'];
+									$todate = $_POST['enddate'];
+									
+									// Add filter criteria to SQL query
+									$sql .= " AND leavea.date BETWEEN '$checkdate' AND '$todate' ";
+								}
+
+								// Check if filter criteria is set in session
+								if (isset($_SESSION['filter_criteria'])) {
+									$filter_criteria = $_SESSION['filter_criteria'];
+
+									// Retrieve filter criteria from session
+									$checkdate = $filter_criteria['checkdate'];
+									$todate = $filter_criteria['todate'];
+
+									// Add filter criteria to SQL query
+									$sql .= " AND leavea.date BETWEEN '$checkdate' AND '$todate' ";
+								}
+
+								// Check if search button clicked
+								if (isset($_POST['search'])) {
+									$filter = $_POST['filter'];
+
+									// Add filter based on selected employee
+									if (!empty($filter)) {
+										$sql = "SELECT * FROM leavea WHERE emp_id='$filter' ORDER BY date ASC";
+									}
+								}
+
+								// Add order by clause
+								$sql .= " ORDER BY leavea.id DESC";
+
+								// Execute the SQL query
+								$res = mysqli_query($conn, $sql);
 					
                                  
 

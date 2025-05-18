@@ -6,6 +6,40 @@
 <div class="module">
 <div class="module-body">
 <div class="module-body">
+   <form action="cmreport.php" method="post" class="form-horizontal row-fluid" id="form1" enctype="multipart/form-data">
+      <div class="control-group">
+         <label class="control-label" for="basicinput">From Date</label>
+         <div class="controls">
+            <input data-title="A tooltip for the input"  type="date" name="startdate" placeholder="" data-original-title="" class="span6 ">
+         </div>
+      </div>
+      <div class="control-group">
+         <label class="control-label" for="basicinput">To Date</label>
+         <div class="controls">
+            <input data-title="A tooltip for the input" type="date" name="enddate" placeholder="" data-original-title="" class="span6 ">
+         </div>
+      </div>
+      <div class="control-group">
+         <label class="control-label" for="basicinput">Employee</label>
+         <div class="controls">
+            <select name="emp" >
+               <option value="">Please select Employee..</option>
+               <?php 
+                  $emp_sql=mysqli_query($conn,"SELECT * FROM `emp` WHERE `status`=0");
+                  while ($emp_row=mysqli_fetch_assoc($emp_sql)) { ?>
+               <option value="<?php echo $emp_row['emp_id'] ?>"><?php echo $emp_row['emp'] ?></option>
+               <?php }
+                  ?>
+            </select>
+         </div>
+      </div>
+      <div class="control-group">
+         <div class="controls">
+            <button type="submit" class="btn" name="submit" id="submit">Search</button>
+         </div>
+      </div>
+   </form>
+   <br>
    <div class="btn-group pull-right" data-toggle="buttons-radio">
       <a href="cm_Form.php"><button type="submit" class="btn btn-success" name="active">
       Add New</button></a>
@@ -23,15 +57,39 @@
                   <th>Company/Customer</th>
                   <th>Total</th>
                   <th>Score</th>
-                  <th>Percenrage(%)</th>
+                  <th>Percentage(%)</th>
                   <th>Status</th>
                   <th>Action</th>
                </tr>
             </thead>
             <tbody>
                <?php
-                  $sql="SELECT cmreport.*,employee.name FROM `cmreport`,employee where cmreport.cm_empid=employee.emp_id and cmreport.cm_tl='$username' order by cmreport.id desc" ;
-                  
+                  $sql="SELECT cmreport.*,emp.emp as name FROM `cmreport`,emp where cmreport.cm_empid=emp.emp_id and cmreport.cm_tl='$username' order by cmreport.id desc" ;
+                  if (isset($_POST["submit"])) {
+                     $checkdate = $_POST['startdate'];
+                     $todate  = $_POST['enddate'];
+                     $emp_id = $_POST['emp'];
+                     if ($emp_id=='' && $checkdate !='' && $todate!='') {
+                        $sql="SELECT cmreport.*, emp.emp AS name
+                        FROM `cmreport`, emp
+                        WHERE cmreport.cm_empid = emp.emp_id
+                            AND cmreport.cm_tl = '$username'
+                            AND cmreport.cm_auditdate BETWEEN '$checkdate' AND '$todate'
+                        ORDER BY cmreport.id DESC" ;
+                     }elseif($emp_id!='' && $checkdate !='' && $todate!=''){
+                     $sql="SELECT cmreport.*, emp.emp AS name
+                     FROM `cmreport`, emp
+                     WHERE cmreport.cm_empid = emp.emp_id
+                         AND cmreport.cm_tl = '$username'
+                         AND cmreport.cm_auditdate BETWEEN '$checkdate' AND '$todate' and cmreport.cm_empid='$emp_id'
+                     ORDER BY cmreport.id DESC" ;
+                     }elseif($emp_id!='' && $checkdate =='' && $todate==''){
+                        $sql="SELECT cmreport.*,emp.emp as name FROM `cmreport`,emp where cmreport.cm_empid=emp.emp_id and cmreport.cm_tl='$username' and cmreport.cm_empid='$emp_id' order by cmreport.id desc" ;
+                        }
+                     else{
+                        $sql="SELECT cmreport.*,emp.emp as name FROM `cmreport`,emp where cmreport.cm_empid=emp.emp_id and cmreport.cm_tl='$username'  order by cmreport.id desc" ;
+                     }
+                  }
                   
                   $res=mysqli_query($conn,$sql);
                   while($row=mysqli_fetch_assoc($res)) { ?>
